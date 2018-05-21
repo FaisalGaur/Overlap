@@ -34,30 +34,35 @@ while(1):
 
     contours, hierarchy = cv2.findContours(dilated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)  # get contours
 
+    # create an image filled with zeros, single-channel, same size as img.
+    blank = np.zeros( img.shape[0:2] )
+    #cv2.drawContours(img, contours, -1, (0,255,0), 3)
+    count = -1
 
+    filename = cv2.drawContours(blank, contours, 3, 1, thickness=-1)
+    cv2.imshow('contour', blank)
+
+    d={}
+
+    '''
     for contour in contours:
-        # get rectangle bounding contour
-        [x, y, w, h] = cv2.boundingRect(contour)
 
-        # Don't plot small false positives that aren't text
-        if w < 35 and h < 35:
-            continue
-
-        # draw rectangle around contour on original image
-        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 255), 2)
-
+        count = count+1
+        cnt = contours[count]
+        #cv2.drawContours(img, [cnt], 0, 1, thickness=-1)
+        #d["pic{0}".format(count)] = cv2.drawContours(img, contours, count, (0,255,0), thickness=-1)
+        #filename = "pic{0}".format(count)
+        filename = cv2.drawContours(blank.copy(), contours, 3, 1, thickness=-1)
+        #cv2.imshow('contour', filename)
+        #print filename
+        #cv2.imshow('contour', filename)
         '''
-        #you can crop image and send to OCR  , false detected will return no text :)
-        cropped = img_final[y :y +  h , x : x + w]
-
-        s = file_name + '/crop_' + str(index) + '.jpg' 
-        cv2.imwrite(s , cropped)
-        index = index + 1
-
-        '''
-    # show original image with added contours to disk
+        
+  
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    
     cv2.imshow('overlap', img_rgb)
+
 
 
     #press esc key to stop
