@@ -1,3 +1,2 @@
 # Overlap
-Python code with Open CV that detects text overlaps on screen
-Edit one
+Python 2.7 code with Open CV that detects text overlaps on screen
