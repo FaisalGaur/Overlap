@@ -35,6 +35,10 @@ while(1):
     contours, hierarchy = cv2.findContours(dilated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)  # get contours
 
 
+    hierarchy = hierarchy[0]
+
+
+
     for contour in contours:
         # get rectangle bounding contour
         [x, y, w, h] = cv2.boundingRect(contour)
@@ -54,8 +58,31 @@ while(1):
         cv2.imwrite(s , cropped)
         index = index + 1
 
-        '''
+        
     # show original image with added contours to disk
+
+    '''
+    for (x, y, w, h) in hierarchy:
+
+        X1 = x
+        Y1 = y
+        W1 = w
+        H1 = h
+
+        for (x, y, w, h) in hierarchy:
+
+            X2 = x
+            Y2 = y
+            W2 = w
+            H2 = h
+
+            if (X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1):
+                print 'no intersect'
+            else:
+                print 'intersect'
+                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), -1)
+
+
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     cv2.imshow('overlap', img_rgb)
 
