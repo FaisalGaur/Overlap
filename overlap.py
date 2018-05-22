@@ -36,11 +36,18 @@ while(1):
 
     # create an image filled with zeros, single-channel, same size as img.
     blank = np.zeros( img.shape[0:2] )
-    #cv2.drawContours(img, contours, -1, (0,255,0), 3)
+
     count = -1
 
-    filename = cv2.drawContours(blank, contours, 3, 1, thickness=-1)
-    cv2.imshow('contour', blank)
+    img1 = blank.copy()
+    img2 = blank.copy()
+
+    cv2.drawContours(img1, contours, 0, 1, thickness=-1)
+    cv2.drawContours(img2, contours, 1, 1, thickness=-1)
+    
+    overlap = cv2.bitwise_or(img1, img2)
+    
+    cv2.imshow('contour', overlap)
 
     d={}
 
