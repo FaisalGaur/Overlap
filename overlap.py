@@ -64,6 +64,9 @@ while(1):
                 W2 = w
                 H2 = h
 
+                if [X1, Y1, W1, H1] == [X2, Y2, W2, H2]:
+                    continue
+
             
                 if (X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1):
                     print 'No overlap'
@@ -72,9 +75,9 @@ while(1):
                     print 'Overlap detected!!!'
                     print ("{} {} {} {}  {} {} {} {}".format(X1, Y1, W1, H1, X2, Y2, W2, H2))
                     
-        # show original image with added contours to disk
-        #img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    cv2.imshow('overlap', img)
+    #show original image with added contours to disk
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    cv2.imshow('overlap', img_rgb)
     #press esc key to stop, any other key to continue
     k = cv2.waitKey(0) & 0xFF
     if k == 27:
