@@ -42,11 +42,11 @@ while(1):
         [x, y, w, h] = cv2.boundingRect(contour)
 
         # Don't plot small false positives that aren't text
-        if w < 200 and h < 200:
+        if w < 50 and h < 50:
             continue
 
         # draw rectangle around contour on original image
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        # cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
         myList.append(cv2.boundingRect(contour))
 
@@ -70,9 +70,11 @@ while(1):
             
                 if (X1+W1<X2 or X2+W2<X1 or Y1+H1<Y2 or Y2+H2<Y1):
                     print 'No overlap'
+                    cv2.rectangle(img, (X1, Y1), (X1 + W1, Y1 + H1), (0, 255, 0), 2)
                     print ("{} {} {} {}  {} {} {} {}".format(X1, Y1, W1, H1, X2, Y2, W2, H2))
                 else:
                     print 'Overlap detected!!!'
+                    cv2.rectangle(img, (X2, Y2), (X2 + W2, Y2 + H2), (255, 0, 0), 2)
                     print ("{} {} {} {}  {} {} {} {}".format(X1, Y1, W1, H1, X2, Y2, W2, H2))
                     
     #show original image with added contours to disk
