@@ -20,6 +20,7 @@ def select_region_of_interest():
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     r = cv2.selectROI(windowName='grab roi', img=image, showCrosshair=True, fromCenter=False)
     cv2.destroyAllWindows()
+    print(r[0], r[1], r[0] + r[2], r[1] + r[3])
     return r[0], r[1], r[0] + r[2], r[1] + r[3]
 
 
@@ -52,5 +53,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
